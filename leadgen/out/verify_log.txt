@@ -1,0 +1,8 @@
+[probe] https://gis.cuyahogacounty.gov/server/rest/services/CCFO/Parcel_Fabric_Taxparcels/FeatureServer/0?f=json
+        142 fields; required missing: none
+[count] preforeclosure    2967  where=property_class='R' AND parcel_zip IN (44102,44103,44104,44105,44108,44109,44110,44112,44127,44128) AND foreclosure_flag = 1
+[count] probate           1157  where=property_class='R' AND parcel_zip IN (44102,44103,44104,44105,44108,44109,44110,44112,44127,44128) AND (parcel_owner LIKE '%ESTATE%' OR parcel_owner LIKE '%HEIR%' OR parcel_owner LIKE '%ET AL%' OR parcel_owner LIKE '%LIFE EST%')
+[count] lien_sold          357  where=property_class='R' AND parcel_zip IN (44102,44103,44104,44105,44108,44109,44110,44112,44127,44128) AND cert_sold_flag = 1
+[count] channel hits total    4481  (prompt baseline 4,481)
+[count] comp universe         8469  (prompt baseline 8,469)
+[count] where=property_class='R' AND parcel_zip IN (44102,44103,44104,44105,44108,44109,44110,44112,44127,44128) AND last_transfer_date >= DATE '2025-10-31'
