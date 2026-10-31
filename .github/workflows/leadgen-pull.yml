@@ -7,6 +7,7 @@ on:
   push:
     paths:
       - '.github/workflows/leadgen-pull.yml'
+      - 'leadgen/pull_leads.py'
 permissions:
   contents: write
 jobs:
