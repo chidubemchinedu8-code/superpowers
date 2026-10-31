@@ -1,22 +1,37 @@
 name: leadgen-pull
-# One-shot: runs the Cuyahoga pull on a runner that can reach the county GIS,
-# then uploads the CSV as an artifact. Nothing is committed back.
+# Runs the Cuyahoga pull on a runner that can reach the county GIS.
+# Uploads the CSV as an artifact AND commits it back to the branch so the
+# agent (which cannot download artifacts) can pick it up with git.
 on:
   workflow_dispatch:
   push:
     paths:
       - '.github/workflows/leadgen-pull.yml'
+permissions:
+  contents: write
 jobs:
   pull:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: python3 leadgen/pull_leads.py --verify-endpoint
-      - run: python3 leadgen/pull_leads.py --as-of 2026-10-31
+      - name: verify endpoint
+        run: python3 leadgen/pull_leads.py --verify-endpoint | tee leadgen/out/verify_log.txt
+      - name: pull
+        run: python3 leadgen/pull_leads.py --as-of 2026-10-31 | tee leadgen/out/pull_log.txt
       - uses: actions/upload-artifact@v4
         with:
           name: leads-cuyahoga
           path: leadgen/out/LEADS_cuyahoga.csv
+      - name: commit results for pickup
+        run: |
+          git config user.name "leadgen-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -f leadgen/out/LEADS_cuyahoga.csv leadgen/out/pull_log.txt leadgen/out/verify_log.txt
+          git commit -m "leadgen: automated pull results" || echo "nothing new to commit"
+          git push origin HEAD:refs/heads/${{ github.ref_name }}
