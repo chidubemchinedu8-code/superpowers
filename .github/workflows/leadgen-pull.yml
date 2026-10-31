@@ -1,0 +1,22 @@
+name: leadgen-pull
+# One-shot: runs the Cuyahoga pull on a runner that can reach the county GIS,
+# then uploads the CSV as an artifact. Nothing is committed back.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/leadgen-pull.yml'
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python3 leadgen/pull_leads.py --verify-endpoint
+      - run: python3 leadgen/pull_leads.py --as-of 2026-10-31
+      - uses: actions/upload-artifact@v4
+        with:
+          name: leads-cuyahoga
+          path: leadgen/out/LEADS_cuyahoga.csv
