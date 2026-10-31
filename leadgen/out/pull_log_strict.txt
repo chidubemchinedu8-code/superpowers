@@ -1,0 +1,116 @@
+==============================================================================
+CUYAHOGA PULL - ranked lead list. Every price is PRELIMINARY.
+as-of 2026-10-31  channels: preforeclosure, probate, lien_sold
+==============================================================================
+
+RANKING WEIGHTS (priority = sum of clock weights + stacking + modifiers)
+  +40   PRE-FORECLOSURE                        clock_preforeclosure
+  +30   PROBATE / HEIR                         clock_probate
+  +25   STACKING BONUS - 2 or more clocks      stacking_bonus
+  +15   tax lien sold                          clock_lien_sold
+  +10   strong ZIP                             strong_zip
+  +8    owes $3,000 or more                    has_lien_over_3k
+  +8    out-of-state owner                     out_of_state_owner
+  +5    tax delinquent                         clock_delinquent
+  +5    ARV over $200,000                      arv_over_200k
+  PRE-FORECLOSURE + PROBATE = 95 beats PRE-FORECLOSURE ALONE = 40
+  PROBATE ALONE = 30 beats lien-sold 15 and delinquency 5
+  strong_zips = 44102, 44109, 44128, 44110; n_clocks counts channels only
+[probe] https://gis.cuyahogacounty.gov/server/rest/services/CCFO/Parcel_Fabric_Taxparcels/FeatureServer/0?f=json
+[probe] 142 fields, all 16 required names present
+[pull ] preforeclosure: where=property_class='R' AND parcel_zip IN (44102,44103,44104,44105,44108,44109,44110,44112,44127,44128) AND foreclosure_flag = 1
+        -> 2967 features
+[pull ] probate: where=property_class='R' AND parcel_zip IN (44102,44103,44104,44105,44108,44109,44110,44112,44127,44128) AND (parcel_owner LIKE '%ESTATE%' OR parcel_owner LIKE '%HEIR%' OR parcel_owner LIKE '%ET AL%' OR parcel_owner LIKE '%LIFE EST%')
+        -> 1157 features
+[pull ] lien_sold: where=property_class='R' AND parcel_zip IN (44102,44103,44104,44105,44108,44109,44110,44112,44127,44128) AND cert_sold_flag = 1
+        -> 357 features
+[pull ] comp universe: where=property_class='R' AND parcel_zip IN (44102,44103,44104,44105,44108,44109,44110,44112,44127,44128) AND last_transfer_date >= DATE '2025-10-31'
+        -> 8469 raw sales
+
+[merge] merged 4481 channel hits -> 4425 distinct properties
+[comps] 8469 raw sales -> 4076 usable comps  (dropped: {'sqft_or_price': 3794, 'price_floor': 153, 'ppsf': 446, 'geometry': 0, 'window': 0})
+
+FUNNEL
+  4,481 channel hits -> 4,425 distinct properties -> 694 kept
+  drops: entity 1,520 | no living area 522 | under ARV floor 1,605 | institution 36 | recent transfer 48
+  no comps: 66 kept and priced blank (still callable)
+  comps: 8,469 raw sales -> 4,076 usable
+
+SIGNAL COMBOS
+   418  preforeclosure
+   145  lien_sold
+   119  probate
+     9  preforeclosure+probate
+     3  probate+lien_sold
+  stacked (2+ clocks): 12
+  comp confidence: 439 HIGH / 189 LOW / 66 NO COMPS
+  comp radius: median 0.25 mi, max 1.25 mi
+
+TOP 12 (PRIORITY desc, then ARV desc)
+  #  PRI STK CHANNELS                         ARV  OFFER HI  SQFT  ADDRESS
+--------------------------------------------------------------------------
+  1  118   2 preforeclosure+probate      $443,750  $266,250  2019  10725 EDGEWATER DR, CLEVELAND, OH, 44102
+  2  113   2 preforeclosure+probate      $183,124  $109,874  2334  3223 DAISY AVE, CLEVELAND, OH, 44109
+  3  113   2 preforeclosure+probate      $149,036   $89,422  3166  1092 E 144 ST, CLEVELAND, OH, 44110
+  4  105   2 preforeclosure+probate      $126,273   $75,764  1440  4210 DAISY AVE, CLEVELAND, OH, 44109
+  5  103   2 preforeclosure+probate      $165,437   $99,262  2551  1904 E 71 ST, CLEVELAND, OH, 44103
+  6  103   2 preforeclosure+probate      $152,706   $91,624  2097  11504 CONTINENTAL AVE, CLEVELAND, OH, 44104
+  7  103   2 preforeclosure+probate      $134,382   $80,629  1835  10711 CRESTWOOD AVE, CLEVELAND, OH, 44104
+  8  103   2 preforeclosure+probate      $132,766   $79,660  2600  11301 DOVE AVE, CLEVELAND, OH, 44105
+  9  103   2 preforeclosure+probate      NO COMPS         -  3403  15018 TERRACE RD, EAST CLEVELAND, OH, 44112
+ 10   88   2 probate+lien_sold           NO COMPS         -  1632  13816 LAKE SHORE DR, BRATENAHL, OH, 44110
+ 11   85   2 probate+lien_sold           $251,126  $150,676  1012  4695 OSBORN RD, GARFIELD HEIGHTS, OH, 44128
+ 12   83   2 probate+lien_sold           $303,298  $181,979  2709  1117 MT VERNON BLVD, CLEVELAND HEIGHTS, OH, 44112
+
+top row: preforeclosure+probate = priority 118
+
+wrote leadgen/out/LEADS_cuyahoga_strict.csv  (694 rows x 39 columns)
+
+SELF-CHECKS
+   1 PASS  no institution-owned rows                                      0 institution-owned rows
+   2 PASS  no entity/LLC owners                                           0 entity/LLC owners
+   3 PASS  every row clears the ARV floor                                 0 rows under $125,000
+   4 PASS  no repairs quoted without a grade                              0 rows quote repairs without a grade
+   5 PASS  sorted by priority descending                                  0 ordering violations
+   6 PASS  buyer max never exceeds 70% of ARV                             0 rows where buyer max exceeds 70% of ARV
+   7 PASS  offer never exceeds buyer max                                  0 rows where an offer exceeds buyer max
+   8 PASS  no duplicate properties in output                              0 duplicate properties
+   9 PASS  merged count == distinct parcels before filtering              merged 4425 vs distinct parcels before filtering 4425
+  10 PASS  every priced row used comps from the subject's own neighbourhood 0 priced rows used comps outside the subject's own neighbourhood
+  11 PASS  no comp radius exceeds 1.5 miles                               0 comp radii exceed 1.5 mi
+  12 PASS  no comp set smaller than 3 sales                               0 comp sets smaller than 3
+  13 PASS  every comp sale is inside the 12-month window                  0 rows used a sale older than 2025-10-31
+  14 PASS  unpriced rows carry no invented ARV                            0 unpriced rows carry an invented ARV
+
+14/14 PASS
+
+CASE NUMBER + AUCTION DATE - manual lookup, one per lead. Both ship blank.
+
+CUYAHOGA COUNTY, OH
+  1. cpdocket.cp.cuyahogacounty.gov
+       search the owner name (or the address for the owner name), open the
+       CV case -> read / copy the CASE NUMBER
+  2. cuyahoga.sheriffsaleauction.ohio.gov
+       paste the case number -> Status must read "Scheduled"
+       read: Sale Date · Status · Opening Bid (~2/3 of judgment) · Judgment
+     Both auction sites are login-gated - do not try to script them.
+
+BROWARD COUNTY, FL (only if you add that market)
+  1. browardclerk.org -> search by owner -> case number
+     NOTE: the Clerk does not index auctions by address.
+  2. broward.realforeclose.com -> paste case number -> Sale Date · Status
+
+Then: CALL FIRST. On the call ask "has a sale date been set?" and write it in.
+  > 30 days out   -> normal
+  0-30 days out   -> TRIAGE: one fast call, or explain honestly and step back
+  date has passed -> the owner may already have lost it. Verify ownership first.
+
+STEP 1  Call the stacked leads first.
+STEP 2  6 condition questions + "has a sale date been set?"
+STEP 3  Ask for the 5 photos. No photos, no price.
+STEP 4  Grade, then quote from OFFER LOW (55%). Never open at the top.
+STEP 5  Log CALL STATUS the same day, dated.
+STEP 6  Work the 7-touch cadence.
+STEP 7  Submit to RV on a verbal - that is what a verbal is for.
+STEP 8  Keep the whole fee at $10,000. The split is RV's, not mine to shrink.
+
