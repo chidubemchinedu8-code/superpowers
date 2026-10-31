@@ -225,12 +225,30 @@ Plan against ~500–1,250 dials per contract. 690 leads swept once is 0.6–1.5
 contracts — a first try, not a business. The second and third touch cycles
 matter more than a bigger list.
 
-## 7. Two questions still open (they are not data questions)
+## 7. Questions that are now answered
 
-1. Is the JV split a percentage of the assignment fee, or a fixed dollar amount?
-   Until answered: 50/50 of the **fee**, my side $5,000, whole fee $10,000.
-2. Do you have any real buyer boxes (ARV range, buyer %, price cap, type,
-   condition, close days)? One real box beats all theory.
+1. **JV split — CONFIRMED 2026-10-31: 50% of the fee.** Whole fee $10,000,
+   my side $5,000. The numbers were already right; only the label changed.
+2. **Buy box — CONFIRMED 2026-10-31.** ARV $125K+, contract under $900K, buy at
+   ~70% of ARV, 21–30 day close, SFR/duplex/multi-family, any condition, cash or
+   seller finance, and a **verbal** seller agreement is enough to submit. Fit is
+   measured in `out/pull_log.txt` (`BUY BOX FIT`): 632/632 ARV-clearing leads
+   pass the $125K floor, 698/698 clear the $900K contract ceiling, and the
+   21–30 day close is **TIGHT** against the 45–90 day assignment assumption —
+   ask on the call, never assume.
 
-Not answered here because they are not in the data, and inventing them is how
-this project shipped a false PASS three times.
+## 8. Readable deliverable (Google Sheets)
+
+The dial-ready view lives in a Google Sheet built from this CSV:
+
+https://docs.google.com/spreadsheets/d/1Hsqo4SvnfyTXfFCLndN2BqFJsFGXqoDooUKz7aUs6S4/edit
+
+- `START HERE` — what it is, where to start, fee/split, market-coverage warning.
+- `Dial Next - 12 stacked` — the 12 two-clock leads, 19 columns, call top-down.
+- `All 698 Leads` — all 698 rows, 12 working columns, ranked.
+- `How To Read This` — every column and label, and the do-not-dial caveats.
+- `Buy Box` — the confirmed criteria, fit counts, and all 15 markets
+  (only Cleveland/Cuyahoga is pulled).
+
+The sheet is a *working view*; the 39-column spec record remains
+`out/LEADS_cuyahoga.csv`.
