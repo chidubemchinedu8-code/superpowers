@@ -708,16 +708,19 @@ def run_pipeline(source: str, as_of: date, channels: tuple, strict_entities: boo
             style=norm_style(a.get(F["style"])),
             lat=c.get("y"), lon=c.get("x"), channels=set(rec["channels"]),
         )
-        arv_for(lead, comps_by_hood, as_of)
-        if lead.arv is not None and lead.arv < ARV_FLOOR:
-            drops["under_arv_floor"] += 1
-            continue
+        # Gate order per the spec: entity -> no living area -> ownership
+        # stage -> ARV floor. Ordering only affects which bucket a drop is
+        # reported in, never which rows survive.
         stage = ownership_stage(owner, lead.xfer, as_of)
         if stage.startswith("GONE"):
             drops["institution"] += 1
             continue
         if stage.startswith("CHECK"):
             drops["recent_transfer"] += 1
+            continue
+        arv_for(lead, comps_by_hood, as_of)
+        if lead.arv is not None and lead.arv < ARV_FLOOR:
+            drops["under_arv_floor"] += 1
             continue
         lead.priority, lead.n_clocks = priority_of(
             lead.channels, lead.zip5, lead.lien, lead.mail_state, lead.arv)
