@@ -68,6 +68,37 @@ MIN_LIEN = 3000
 ARV_FLOOR = 125_000
 MIN_SQFT = 500
 WHOLE_FEE = 10_000
+# RealVenture buy box - CONFIRMED by the client 2026-10-31 (was ASSUMED).
+BUY_BOX = {
+    "arv_floor": 125_000,
+    "contract_cap": 900_000,
+    "ltv_cap": 0.70,
+    "close_days": (21, 30),
+    "types": ("SFR", "duplex", "multi-family"),
+    "condition": "any",
+    "financing": ("cash", "seller finance"),
+    "verbal_agreement_is_enough_to_submit": True,
+    "markets": {
+        "Akron, OH": "HOTTEST - small-city pricing next to a major metro",
+        "Atlanta, GA": "HOTTEST - institutional buyers active, fast at scale",
+        "Birmingham, AL": "HOTTEST - low basis, strong rent ratios",
+        "Cleveland, OH": "HOTTEST - low entry prices, heavy rental demand",
+        "Columbus, OH": "HOTTEST - growing metro, deep landlord base",
+        "Dayton, OH": "HOTTEST - affordable, strong rent-to-price ratios",
+        "Decatur, IL": "HOTTEST - cheap basis, good first assignments",
+        "Detroit, MI": "HOTTEST - heavy distress, wide spreads, rehab-heavy",
+        "Indianapolis, IN": "HOTTEST - landlord-friendly, very deep buyer pool",
+        "Jackson, MS": "HOTTEST - low basis, neighbourhood selection critical",
+        "Kansas City, MO": "HOTTEST - steady cash-flow buyers",
+        "Memphis, TN": "HOTTEST - turnkey rental capital, fast closers",
+        "Peoria, IL": "HOTTEST - small market, low competition",
+        "St Louis, MO": "HOTTEST - deep investor bench, neighbourhood matters",
+        "Toledo, OH": "HOTTEST - cheap doors, steady cash flow",
+    },
+}
+# This pull is Cuyahoga County only. Cleveland OH is in the box; the other 14
+# markets are NOT pulled and must not be implied by this file.
+PULL_MARKET = "Cleveland, OH"
 MY_SIDE = WHOLE_FEE // 2
 BUYER_PCT = 0.70
 OFFER_LOW_PCT = 0.55
@@ -283,7 +314,7 @@ ARV_STATUS_NONE = "NO COMP DATA"
 OFFER_STATUS_PRICED = ("CEILING ONLY - no known repairs, this is the max; "
                        "grading can only lower it")
 OFFER_STATUS_NONE = "NO COMP DATA"
-RV_SPLIT = "50/50 - CONFIRM: % of fee or fixed $?"
+RV_SPLIT = "50/50 of the fee - CONFIRMED 2026-10-31"
 
 ENTITY_TOKENS = ["LLC", "LTD", "INC", "HOLDINGS", "PROPERTIES", "CORP",
                  "GROUP", "INVESTMENTS", " LP", "L.P.", " CO.", "COMPANY"]
@@ -990,6 +1021,30 @@ def print_checks(results) -> bool:
     return ok_all
 
 
+def print_buybox(rows):
+    """Fit against the CONFIRMED buy box. This is a report, not a gate: the
+    box tells you which deals RV can take, not which sellers to call."""
+    in_box = sum(1 for r in rows if not r["ADDRESS"].upper().endswith(", FL"))
+    above = [r for r in rows if isinstance(r["ARV SCREEN"], int)]
+    floor_ok = [r for r in above if r["ARV SCREEN"] >= BUY_BOX["arv_floor"]]
+    over_cap = [r for r in rows
+                if isinstance(r["OFFER HIGH (60% ARV, no repairs)"], int)
+                and r["OFFER HIGH (60% ARV, no repairs)"] > BUY_BOX["contract_cap"]]
+    lo, hi = BUY_BOX["close_days"]
+    print("\nBUY BOX FIT (confirmed 2026-10-31)")
+    print(f"  market: {PULL_MARKET} - in the {len(BUY_BOX['markets'])}-market "
+          f"hot list. {in_box}/{len(rows)} rows are in-box on geography.")
+    print(f"  ARV >= ${BUY_BOX['arv_floor']:,}: {len(floor_ok)}/{len(above)} "
+          f"priced rows clear it (the rest are gated out before output)")
+    print(f"  contract under ${BUY_BOX['contract_cap']:,}: "
+          f"{len(rows) - len(over_cap)}/{len(rows)} clear it")
+    print(f"  close 21-30 days vs a 45-90 day assignment assumption: "
+          f"TIGHT. A sale date inside 30 days means you cannot perform - "
+          f"ask on the call, never assume.")
+    print(f"  types/condition/financing: this data cannot tell you SFR vs "
+          f"multi or condition. Grade it on the call.")
+
+
 def write_csv(rows, path: str) -> None:
     os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
     with open(path, "w", newline="", encoding="utf-8") as fh:
@@ -1044,6 +1099,7 @@ BROWARD COUNTY, FL (only if you add that market)
   2. broward.realforeclose.com -> paste case number -> Sale Date · Status
 
 Then: CALL FIRST. On the call ask "has a sale date been set?" and write it in.
+RV closes in 21-30 days, so the window is tight by design.
   > 30 days out   -> normal
   0-30 days out   -> TRIAGE: one fast call, or explain honestly and step back
   date has passed -> the owner may already have lost it. Verify ownership first.
@@ -1341,6 +1397,7 @@ def main(argv=None) -> int:
                              args.strict_substring_entities, args.cache or None)
     print_funnel(ctx)
     print_signal_combos(rows)
+    print_buybox(rows)
     print_top(rows, args.top)
 
     if not rows:
