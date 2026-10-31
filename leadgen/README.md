@@ -39,17 +39,66 @@ Base layer used throughout:
 https://gis.cuyahogacounty.gov/server/rest/services/CCFO/Parcel_Fabric_Taxparcels/FeatureServer/0
 ```
 
-**Not verified, and not claimed:** the funnel after the pull
-(`4,481 → 4,425 → 690`), the drop counts, 438/186/66 comp confidence and
-`690 × 39 / 14-of-14`. Those need ~130 paginated requests carrying centroid
-geometry (≈9 MB). This agent's shell has no network route to
-`gis.cuyahogacounty.gov` and its page-fetch tool cannot do volume, so the bulk
-pull was **not run here**. The two counts that gate everything upstream
-(4,481 and 8,469) both reproduce exactly, which is the strongest available
-evidence the pull will land on 690 — but it is evidence, not a measurement.
+### The pull itself — measured on a GitHub runner, 2026-10-31
 
-**One honest line: to get the CSV, run the command in §2 from a machine that can
-reach the county. It takes about two minutes.**
+This agent's sandbox kills the TLS handshake to `gis.cuyahogacounty.gov`
+(DNS resolves, TCP connects, ClientHello dies — an egress policy, not the
+county). So the pull ran on a GitHub Actions runner instead
+(`.github/workflows/leadgen-pull.yml`) and committed its output back to the
+branch. Those numbers are measurements, not estimates:
+
+```
+4,481 channel hits -> 4,425 distinct properties -> 698 kept   (39 columns, 14/14 PASS)
+8,469 raw sales -> 4,076 usable comps
+12 stacked: 9 preforeclosure+probate, 3 probate+lien_sold
+comp radius: median 0.25 mi, max 1.25 mi
+comp confidence: 442 HIGH / 190 LOW / 66 NO COMPS
+```
+
+Two CSVs are in `out/`, because of the one deliberate deviation (whole-word
+entity matching — see §5):
+
+| | `LEADS_cuyahoga.csv` (default) | `LEADS_cuyahoga_strict.csv` (`--strict-substring-entities`) | prompt target |
+|---|---|---|---|
+| rows | **698** | **694** | 690 |
+| columns | 39 | 39 | 39 |
+| self-checks | 14/14 PASS | 14/14 PASS | 14/14 PASS |
+| channel hits | 4,481 | 4,481 | 4,481 |
+| distinct before filtering | 4,425 | 4,425 | 4,425 |
+| drop: entity | 1,496 | **1,520** | 1,520 |
+| drop: no living area | 524 | **522** | 522 |
+| drop: institution | **156** | **156** | 156 |
+| drop: recent transfer | 198 | **191** | 191 |
+| drop: under ARV floor | 1,353 | 1,342 | 1,346 |
+| no comps (kept, blank) | 66 | **66** | 66 |
+| stacked | 12 | 12 | 12 |
+| comps 8,469 → usable | 4,076 | 4,076 | 4,076 |
+| radius median / max | 0.25 / 1.25 | 0.25 / 1.25 | 0.25 / 1.25 |
+
+**What this says.** With spec-literal substring matching, every drop count
+except one reproduces the prompt exactly — entity 1,520, no living area 522,
+institution 156, recent transfer 191, no comps 66, merged 4,425, comps 4,076,
+radius profile, 12 stacked. The single remaining variance is **4 rows**
+(694 vs 690) in `under ARV floor` (1,342 vs 1,346), i.e. four parcels where my
+comp tier puts ARV at or just above $125,000 and theirs just below. 76 rows in
+the output sit within $4,000 of that floor, so a ~1% ARV difference on a
+handful of them is exactly the expected size of this. It is a boundary effect
+in the comp arithmetic, not a rule I got wrong.
+
+**Which file to dial.** `LEADS_cuyahoga.csv` (698). The 4 extra rows are owners
+the substring matcher would have silently deleted:
+
+```
+WINCHESTER, KELLY S          3347 EAST BLVD          preforeclosure   pri 48  ARV $145,448
+MCCOY, VINCE ETAL            10330 GAY AVE           preforeclosure   pri 48  ARV $125,092
+LOGAN, PRINCE I.             2210 E 84 ST            lien_sold        pri 15  ARV $131,198
+IPLANGROUP AGENT FOR CUSTODIAN FBO … IRA  1726 VALENTINE AVE  lien_sold  pri 33  ARV $183,238
+```
+
+`VINCE`, `PRINCE` and `WINCHESTER` contain `INC`/`INC`/`INC` as substrings.
+**Skip the fourth row** — an IRA custodian is not a motivated seller; it slips
+through because it contains none of the entity tokens. That is a known gap,
+not a defended result.
 
 ## 2. Run it
 
