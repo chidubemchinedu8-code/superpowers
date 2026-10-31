@@ -24,6 +24,8 @@ jobs:
         run: mkdir -p leadgen/out && python3 leadgen/pull_leads.py --verify-endpoint | tee leadgen/out/verify_log.txt
       - name: pull
         run: mkdir -p leadgen/out && python3 leadgen/pull_leads.py --as-of 2026-10-31 | tee leadgen/out/pull_log.txt
+      - name: pull (spec-literal substring entity matching, for comparison)
+        run: mkdir -p leadgen/out && python3 leadgen/pull_leads.py --as-of 2026-10-31 --strict-substring-entities --out leadgen/out/LEADS_cuyahoga_strict.csv | tee leadgen/out/pull_log_strict.txt
       - uses: actions/upload-artifact@v4
         with:
           name: leads-cuyahoga
@@ -32,6 +34,6 @@ jobs:
         run: |
           git config user.name "leadgen-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add -f leadgen/out/LEADS_cuyahoga.csv leadgen/out/pull_log.txt leadgen/out/verify_log.txt
+          git add -f leadgen/out/LEADS_cuyahoga.csv leadgen/out/LEADS_cuyahoga_strict.csv leadgen/out/pull_log.txt leadgen/out/pull_log_strict.txt leadgen/out/verify_log.txt
           git commit -m "leadgen: automated pull results" || echo "nothing new to commit"
           git push origin HEAD:refs/heads/${{ github.ref_name }}
