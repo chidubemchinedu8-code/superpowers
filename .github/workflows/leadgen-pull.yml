@@ -21,9 +21,9 @@ jobs:
         with:
           python-version: '3.11'
       - name: verify endpoint
-        run: python3 leadgen/pull_leads.py --verify-endpoint | tee leadgen/out/verify_log.txt
+        run: mkdir -p leadgen/out && python3 leadgen/pull_leads.py --verify-endpoint | tee leadgen/out/verify_log.txt
       - name: pull
-        run: python3 leadgen/pull_leads.py --as-of 2026-10-31 | tee leadgen/out/pull_log.txt
+        run: mkdir -p leadgen/out && python3 leadgen/pull_leads.py --as-of 2026-10-31 | tee leadgen/out/pull_log.txt
       - uses: actions/upload-artifact@v4
         with:
           name: leads-cuyahoga
