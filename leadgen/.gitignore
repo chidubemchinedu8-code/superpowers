@@ -1,0 +1,3 @@
+# generated lead lists and raw response cache - never commit
+out/
+.cache/

@@ -1,0 +1,589 @@
+{
+ "meta": {
+  "synthetic": true,
+  "as_of": "2026-10-31",
+  "note": "FABRICATED test data. Every owner, address, price and parcel is invented to exercise the pipeline's rules and self-checks. It is NOT a lead list and must never be dialled or quoted.",
+  "expected": {
+   "kept": 4,
+   "stacked": 1,
+   "no_comps": 1
+  }
+ },
+ "layers": {
+  "preforeclosure": [
+   {
+    "attributes": {
+     "parcelpin": "SUBJ001",
+     "parcel_owner": "MARY T VINCENT",
+     "par_addr_all": "1001 FIXTURE AVE",
+     "parcel_zip": 44102.0,
+     "total_res_liv_area": 1300.0,
+     "max_age": 1928.0,
+     "last_transfer_date": 1084233600000,
+     "last_sales_amount": 64000.0,
+     "grand_total_balance": 63496.0,
+     "neighborhood_code": "C01",
+     "res_styles": "CAP",
+     "mail_state": "FL",
+     "foreclosure_flag": 1,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.75,
+     "y": 41.48
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "SUBJ001",
+     "parcel_owner": "MARY T VINCENT",
+     "par_addr_all": "1001 FIXTURE AVE",
+     "parcel_zip": 44102.0,
+     "total_res_liv_area": 1300.0,
+     "max_age": 1928.0,
+     "last_transfer_date": 1084233600000,
+     "last_sales_amount": 64000.0,
+     "grand_total_balance": 63496.0,
+     "neighborhood_code": "C01",
+     "res_styles": "CAP",
+     "mail_state": "FL",
+     "foreclosure_flag": 1,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.75,
+     "y": 41.48
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "DROP001",
+     "parcel_owner": "ACME HOLDINGS LLC",
+     "par_addr_all": "2002 FIXTURE AVE",
+     "parcel_zip": 44102.0,
+     "total_res_liv_area": 1300.0,
+     "max_age": 1930.0,
+     "last_transfer_date": 915148800000,
+     "last_sales_amount": 40000.0,
+     "grand_total_balance": 8000.0,
+     "neighborhood_code": "C01",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 1,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.75,
+     "y": 41.48
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "DROP002",
+     "parcel_owner": "PETER A NOHOUSE",
+     "par_addr_all": "2003 FIXTURE AVE",
+     "parcel_zip": 44102.0,
+     "total_res_liv_area": 300.0,
+     "max_age": 1930.0,
+     "last_transfer_date": 915148800000,
+     "last_sales_amount": 30000.0,
+     "grand_total_balance": 5000.0,
+     "neighborhood_code": "C01",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 1,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.75,
+     "y": 41.48
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "DROP003",
+     "parcel_owner": "ANA LOWVALUE",
+     "par_addr_all": "2004 FIXTURE AVE",
+     "parcel_zip": 44104.0,
+     "total_res_liv_area": 1300.0,
+     "max_age": 1930.0,
+     "last_transfer_date": 915148800000,
+     "last_sales_amount": 30000.0,
+     "grand_total_balance": 5000.0,
+     "neighborhood_code": "C05",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 1,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.75,
+     "y": 41.48
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "DROP004",
+     "parcel_owner": "WELLS FARGO BANK NA",
+     "par_addr_all": "2005 FIXTURE AVE",
+     "parcel_zip": 44102.0,
+     "total_res_liv_area": 1300.0,
+     "max_age": 1930.0,
+     "last_transfer_date": 883612800000,
+     "last_sales_amount": 40000.0,
+     "grand_total_balance": 9000.0,
+     "neighborhood_code": "C01",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 1,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.75,
+     "y": 41.48
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "DROP005",
+     "parcel_owner": "LUIS RECENTBUY",
+     "par_addr_all": "2006 FIXTURE AVE",
+     "parcel_zip": 44102.0,
+     "total_res_liv_area": 1300.0,
+     "max_age": 1930.0,
+     "last_transfer_date": 1785542400000,
+     "last_sales_amount": 120000.0,
+     "grand_total_balance": 4000.0,
+     "neighborhood_code": "C01",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 1,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.75,
+     "y": 41.48
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "SUBJ004",
+     "parcel_owner": "LINCOLN SPENCER",
+     "par_addr_all": "1004 FIXTURE AVE",
+     "parcel_zip": 44110.0,
+     "total_res_liv_area": 1250.0,
+     "max_age": 1942.0,
+     "last_transfer_date": 647049600000,
+     "last_sales_amount": 38000.0,
+     "grand_total_balance": 0.0,
+     "neighborhood_code": "C09",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 1,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.75,
+     "y": 41.48
+    }
+   }
+  ],
+  "probate": [
+   {
+    "attributes": {
+     "parcelpin": "SUBJ001",
+     "parcel_owner": "MARY T VINCENT",
+     "par_addr_all": "1001 FIXTURE AVE",
+     "parcel_zip": 44102.0,
+     "total_res_liv_area": 1300.0,
+     "max_age": 1928.0,
+     "last_transfer_date": 1084233600000,
+     "last_sales_amount": 64000.0,
+     "grand_total_balance": 63496.0,
+     "neighborhood_code": "C01",
+     "res_styles": "CAP",
+     "mail_state": "FL",
+     "foreclosure_flag": 0,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "SUBJ002",
+     "parcel_owner": "JOHN A KING ESTATE",
+     "par_addr_all": "1002 FIXTURE AVE",
+     "parcel_zip": 44109.0,
+     "total_res_liv_area": 1250.0,
+     "max_age": 1925.0,
+     "last_transfer_date": 794102400000,
+     "last_sales_amount": 52000.0,
+     "grand_total_balance": 4500.0,
+     "neighborhood_code": "C01",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 0,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.75,
+     "y": 41.48
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "DROP001",
+     "parcel_owner": "ACME HOLDINGS LLC",
+     "par_addr_all": "2002 FIXTURE AVE",
+     "parcel_zip": 44102.0,
+     "total_res_liv_area": 1300.0,
+     "max_age": 1930.0,
+     "last_transfer_date": 915148800000,
+     "last_sales_amount": 40000.0,
+     "grand_total_balance": 8000.0,
+     "neighborhood_code": "C01",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 0,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    }
+   }
+  ],
+  "lien_sold": [
+   {
+    "attributes": {
+     "parcelpin": "SUBJ003",
+     "parcel_owner": "ROBERT L SPENCER",
+     "par_addr_all": "1003 FIXTURE AVE",
+     "parcel_zip": 44103.0,
+     "total_res_liv_area": 1280.0,
+     "max_age": 1919.0,
+     "last_transfer_date": 596851200000,
+     "last_sales_amount": 41000.0,
+     "grand_total_balance": 1200.0,
+     "neighborhood_code": "C01",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 0,
+     "cert_sold_flag": 1,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.75,
+     "y": 41.48
+    }
+   }
+  ],
+  "comps": [
+   {
+    "attributes": {
+     "parcelpin": "C01COMP00",
+     "parcel_owner": "SYNTHETIC OWNER",
+     "par_addr_all": "00 FIXTURE ST",
+     "parcel_zip": 44102.0,
+     "total_res_liv_area": 1300.0,
+     "max_age": 1925.0,
+     "last_transfer_date": 1781481600000,
+     "last_sales_amount": 156000.0,
+     "grand_total_balance": 0.0,
+     "neighborhood_code": "C01",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 0,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.749226,
+     "y": 41.480725
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "C01COMP01",
+     "parcel_owner": "SYNTHETIC OWNER",
+     "par_addr_all": "01 FIXTURE ST",
+     "parcel_zip": 44102.0,
+     "total_res_liv_area": 1240.0,
+     "max_age": 1925.0,
+     "last_transfer_date": 1781481600000,
+     "last_sales_amount": 149000.0,
+     "grand_total_balance": 0.0,
+     "neighborhood_code": "C01",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 0,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.751161,
+     "y": 41.481159
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "C01COMP02",
+     "parcel_owner": "SYNTHETIC OWNER",
+     "par_addr_all": "02 FIXTURE ST",
+     "parcel_zip": 44102.0,
+     "total_res_liv_area": 1380.0,
+     "max_age": 1925.0,
+     "last_transfer_date": 1781481600000,
+     "last_sales_amount": 166000.0,
+     "grand_total_balance": 0.0,
+     "neighborhood_code": "C01",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 0,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.748259,
+     "y": 41.481449
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "C01COMP03",
+     "parcel_owner": "SYNTHETIC OWNER",
+     "par_addr_all": "03 FIXTURE ST",
+     "parcel_zip": 44102.0,
+     "total_res_liv_area": 1200.0,
+     "max_age": 1925.0,
+     "last_transfer_date": 1781481600000,
+     "last_sales_amount": 144000.0,
+     "grand_total_balance": 0.0,
+     "neighborhood_code": "C01",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 0,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.751935,
+     "y": 41.481739
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "C01COMP04",
+     "parcel_owner": "SYNTHETIC OWNER",
+     "par_addr_all": "04 FIXTURE ST",
+     "parcel_zip": 44102.0,
+     "total_res_liv_area": 1420.0,
+     "max_age": 1925.0,
+     "last_transfer_date": 1781481600000,
+     "last_sales_amount": 170000.0,
+     "grand_total_balance": 0.0,
+     "neighborhood_code": "C01",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 0,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.747678,
+     "y": 41.482174
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "C01COMP05",
+     "parcel_owner": "SYNTHETIC OWNER",
+     "par_addr_all": "05 FIXTURE ST",
+     "parcel_zip": 44102.0,
+     "total_res_liv_area": 1330.0,
+     "max_age": 1925.0,
+     "last_transfer_date": 1781481600000,
+     "last_sales_amount": 160000.0,
+     "grand_total_balance": 0.0,
+     "neighborhood_code": "C01",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 0,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.752709,
+     "y": 41.482609
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "C01COMP06",
+     "parcel_owner": "SYNTHETIC OWNER",
+     "par_addr_all": "06 FIXTURE ST",
+     "parcel_zip": 44102.0,
+     "total_res_liv_area": 1300.0,
+     "max_age": 1925.0,
+     "last_transfer_date": 1781481600000,
+     "last_sales_amount": 150000.0,
+     "grand_total_balance": 0.0,
+     "neighborhood_code": "C01",
+     "res_styles": "COL",
+     "mail_state": "OH",
+     "foreclosure_flag": 0,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.749613,
+     "y": 41.481304
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "C01COMP07",
+     "parcel_owner": "SYNTHETIC OWNER",
+     "par_addr_all": "07 FIXTURE ST",
+     "parcel_zip": 44102.0,
+     "total_res_liv_area": 1280.0,
+     "max_age": 1925.0,
+     "last_transfer_date": 1781481600000,
+     "last_sales_amount": 152000.0,
+     "grand_total_balance": 0.0,
+     "neighborhood_code": "C01",
+     "res_styles": "COL",
+     "mail_state": "OH",
+     "foreclosure_flag": 0,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.749033,
+     "y": 41.481594
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "C05COMP00",
+     "parcel_owner": "SYNTHETIC OWNER",
+     "par_addr_all": "10 FIXTURE ST",
+     "parcel_zip": 44104.0,
+     "total_res_liv_area": 1300.0,
+     "max_age": 1918.0,
+     "last_transfer_date": 1778371200000,
+     "last_sales_amount": 88000.0,
+     "grand_total_balance": 0.0,
+     "neighborhood_code": "C05",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 0,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.749033,
+     "y": 41.480725
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "C05COMP01",
+     "parcel_owner": "SYNTHETIC OWNER",
+     "par_addr_all": "11 FIXTURE ST",
+     "parcel_zip": 44104.0,
+     "total_res_liv_area": 1250.0,
+     "max_age": 1918.0,
+     "last_transfer_date": 1778371200000,
+     "last_sales_amount": 84000.0,
+     "grand_total_balance": 0.0,
+     "neighborhood_code": "C05",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 0,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.749033,
+     "y": 41.481014
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "C05COMP02",
+     "parcel_owner": "SYNTHETIC OWNER",
+     "par_addr_all": "12 FIXTURE ST",
+     "parcel_zip": 44104.0,
+     "total_res_liv_area": 1350.0,
+     "max_age": 1918.0,
+     "last_transfer_date": 1778371200000,
+     "last_sales_amount": 92000.0,
+     "grand_total_balance": 0.0,
+     "neighborhood_code": "C05",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 0,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.749033,
+     "y": 41.481304
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "C05COMP03",
+     "parcel_owner": "SYNTHETIC OWNER",
+     "par_addr_all": "13 FIXTURE ST",
+     "parcel_zip": 44104.0,
+     "total_res_liv_area": 1280.0,
+     "max_age": 1918.0,
+     "last_transfer_date": 1778371200000,
+     "last_sales_amount": 86000.0,
+     "grand_total_balance": 0.0,
+     "neighborhood_code": "C05",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 0,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.749033,
+     "y": 41.481594
+    }
+   },
+   {
+    "attributes": {
+     "parcelpin": "C05COMP04",
+     "parcel_owner": "SYNTHETIC OWNER",
+     "par_addr_all": "14 FIXTURE ST",
+     "parcel_zip": 44104.0,
+     "total_res_liv_area": 1320.0,
+     "max_age": 1918.0,
+     "last_transfer_date": 1778371200000,
+     "last_sales_amount": 90000.0,
+     "grand_total_balance": 0.0,
+     "neighborhood_code": "C05",
+     "res_styles": "CAP",
+     "mail_state": "OH",
+     "foreclosure_flag": 0,
+     "cert_sold_flag": 0,
+     "property_class": "R"
+    },
+    "centroid": {
+     "x": -81.749033,
+     "y": 41.481884
+    }
+   }
+  ]
+ }
+}
