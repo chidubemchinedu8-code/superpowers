@@ -32,7 +32,7 @@ RANKING WEIGHTS (priority = sum of clock weights + stacking + modifiers)
 
 FUNNEL
   4,481 channel hits -> 4,425 distinct properties -> 698 kept
-  drops: entity 1,496 | no living area 524 | under ARV floor 1,622 | institution 36 | recent transfer 49
+  drops: entity 1,496 | no living area 524 | under ARV floor 1,353 | institution 156 | recent transfer 198
   no comps: 66 kept and priced blank (still callable)
   comps: 8,469 raw sales -> 4,076 usable
 
