@@ -46,6 +46,13 @@ SIGNAL COMBOS
   comp confidence: 439 HIGH / 189 LOW / 66 NO COMPS
   comp radius: median 0.25 mi, max 1.25 mi
 
+BUY BOX FIT (confirmed 2026-10-31)
+  market: Cleveland, OH - in the 15-market hot list. 694/694 rows are in-box on geography.
+  ARV >= $125,000: 628/628 priced rows clear it (the rest are gated out before output)
+  contract under $900,000: 694/694 clear it
+  close 21-30 days vs a 45-90 day assignment assumption: TIGHT. A sale date inside 30 days means you cannot perform - ask on the call, never assume.
+  types/condition/financing: this data cannot tell you SFR vs multi or condition. Grade it on the call.
+
 TOP 12 (PRIORITY desc, then ARV desc)
   #  PRI STK CHANNELS                         ARV  OFFER HI  SQFT  ADDRESS
 --------------------------------------------------------------------------
@@ -101,6 +108,7 @@ BROWARD COUNTY, FL (only if you add that market)
   2. broward.realforeclose.com -> paste case number -> Sale Date · Status
 
 Then: CALL FIRST. On the call ask "has a sale date been set?" and write it in.
+RV closes in 21-30 days, so the window is tight by design.
   > 30 days out   -> normal
   0-30 days out   -> TRIAGE: one fast call, or explain honestly and step back
   date has passed -> the owner may already have lost it. Verify ownership first.
